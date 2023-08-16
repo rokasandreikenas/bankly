@@ -77,4 +77,16 @@ describe("transaction history", () => {
 
     expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
+
+  test("should display an error message when fetching transactions fails", async () => {
+    mockUseFetchTransactions.mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: true,
+    });
+
+    render(<TransactionHistory />, { wrapper });
+
+    expect(screen.getByText("Error fetching transactions")).toBeInTheDocument();
+  });
 });
