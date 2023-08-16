@@ -17,7 +17,7 @@ export const TransactionHistory = () => {
       <h1 className="align-left">Transaction History</h1>
       {isLoading && <Loading />}
       {isError && <div>Error fetching transactions</div>}
-      {!isLoading && !!transactions?.length && (
+      {!isLoading && !isError && (
         <Tabs.Root defaultValue="expenses" className="flow">
           <Tabs.List
             className="tabs__list"
