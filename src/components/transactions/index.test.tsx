@@ -1,9 +1,27 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { TransactionHistory } from ".";
+import { useFetchTransactions } from "../../hooks/transactions";
+import { transactions } from "../../api/data/transactions";
+import { wrapper } from "../../api/query";
 
 describe("transaction history", () => {
-  test("the expenses tab should be shown by default", () => {
-    render(<TransactionHistory />);
+  const mockUseFetchTransactions = jest.fn();
+
+  beforeEach(() => {
+    (useFetchTransactions as jest.Mock) = mockUseFetchTransactions;
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("the expenses tab should be shown by default", async () => {
+    mockUseFetchTransactions.mockReturnValue({
+      data: transactions,
+      isLoading: false,
+    });
+
+    render(<TransactionHistory />, { wrapper });
 
     expect(screen.getByText("Transaction History")).toBeInTheDocument();
 
@@ -22,7 +40,7 @@ describe("transaction history", () => {
   });
 
   test.skip("changing between the expenses and income tabs should show different transactions", () => {
-    render(<TransactionHistory />);
+    render(<TransactionHistory />, { wrapper });
 
     const expensesTabTrigger = screen.getByRole("tab", {
       name: "Expenses",
@@ -47,5 +65,16 @@ describe("transaction history", () => {
     expect(incomeTabTrigger).toHaveAttribute("data-state", "active");
     expect(expensesTabTrigger).toHaveAttribute("data-state", "inactive");
     expect(screen.queryByText("-20.25")).not.toBeInTheDocument();
+  });
+
+  test("should display the loading state when data is being fetched", async () => {
+    mockUseFetchTransactions.mockReturnValue({
+      data: undefined,
+      isLoading: true,
+    });
+
+    render(<TransactionHistory />, { wrapper });
+
+    expect(screen.getByText("Loading...")).toBeInTheDocument();
   });
 });
