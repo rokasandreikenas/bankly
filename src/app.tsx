@@ -1,7 +1,7 @@
 import reactLogo from "./assets/react.svg";
 import "./app.css";
 import { Home } from "./views/home";
-import Providers from "./providers";
+import { Providers } from "./providers";
 
 const Header = () => (
   <div className="app__row">
