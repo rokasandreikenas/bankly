@@ -1,3 +1,7 @@
+.transaction-heading {
+  padding-top: var(--spacer-medium);
+}
+
 .tabs {
   margin-top: var(--spacer-medium);
 }
@@ -6,15 +10,16 @@
   display: flex;
   align-items: flex-start;
   gap: var(--spacer-medium);
+  padding-bottom: var(--spacer-small);
 }
 
 .avatar {
   user-select: none;
   width: var(--spacer-xxlarge);
   height: var(--spacer-xxlarge);
-  font-size: var(--font-xlarge);
+  font-size: var(--font-large);
   font-weight: 600;
-  border-radius: var(--spacer-smallall);
+  border-radius: var(--spacer-small);
   border: 2px solid var(--primary-300);
   background-color: var(--background-900);
   text-transform: uppercase;
@@ -25,24 +30,40 @@
 
 table {
   background-color: var(--background-800);
-  border-radius: var(--spacer-smallall);
+  border-radius: var(--spacer-small);
   width: 100%;
   text-align: left;
 }
 
 td {
-  padding: var(--spacer-medium);
+  padding: var(--spacer-small);
 }
 
 th {
-  color: var(--primary-900);
-  border-bottom: 1px solid var(--primary-300);
-  padding: var(--spacer-medium);
+  color: var(--primary-300);
+  border-bottom: 1px solid var(--table-border);
+  padding: var(--spacer-small);
   text-align: left;
+  font-weight: 400;
+}
+
+table tr td:first-child,
+table tr th:first-child {
+  width: 35%;
+}
+
+table tr td:nth-child(3),
+table tr th:nth-child(3) {
+  text-align: right;
 }
 
 .transaction-detail {
   display: grid;
   grid-template-columns: min-content 1fr;
   gap: var(--spacer-medium);
+}
+
+.transaction-category {
+  font-size: 0.8rem;
+  color: var(--primary-300);
 }

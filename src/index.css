@@ -4,7 +4,9 @@
   --background-800: #1e1e27;
   --primary-900: #ffffff;
   --primary-300: #88869f;
+  --button-text: #282834;
   --link: #646cff;
+  --table-border: #323241;
 
   /* spacers */
   --spacer-small: 0.5rem;
@@ -20,6 +22,8 @@
   --font-xlarge: 2rem;
   --font-xxlarge: 3rem;
 
+  --max-content-width: 56rem;
+
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 24px;
@@ -27,14 +31,11 @@
   color: var(--primary-900);
   background-color: var(--background-900);
   font-synthesis: none;
-  width: 90vw;
-  max-width: 800px;
-  margin: auto;
+
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-size-adjust: 100%;
-  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
@@ -57,11 +58,16 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  border: 1px solid #282834;
+  padding: 0.8em 1.6em;
+  font-size: 0.8rem;
   font-weight: 500;
   font-family: inherit;
   background-color: var(--background-900);

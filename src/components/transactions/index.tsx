@@ -14,7 +14,7 @@ export const TransactionHistory = () => {
 
   return (
     <>
-      <h1 className="align-left">Transaction History</h1>
+      <h2 className="align-left transaction-heading">Transaction History</h2>
       {isLoading && <Loading />}
       {isError && <div>Error fetching transactions</div>}
       {!isLoading && !isError && (

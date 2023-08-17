@@ -24,7 +24,7 @@ export const Accounts = () => {
 
   return (
     <>
-      <h1 className="align-left">Your accounts</h1>
+      <h2 className="align-left accounts-heading">Your accounts</h2>
       {isLoading && <Loading />}
       {isError && <div>Error fetching accounts</div>}
       {!isLoading && !isError && (
