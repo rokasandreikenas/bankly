@@ -1,8 +1,10 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { TransactionHistory } from ".";
 import { useFetchTransactions } from "../../hooks/transactions";
 import { transactions } from "../../api/data/transactions";
 import { wrapper } from "../../api/query";
+import { formatCurrency } from "../../utils/currency";
 
 describe("transaction history", () => {
   const mockUseFetchTransactions = jest.fn();
@@ -36,10 +38,10 @@ describe("transaction history", () => {
     });
 
     expect(expensesTable).toBeInTheDocument();
-    expect(screen.getByText("-20.25")).toBeInTheDocument();
+    expect(screen.getByText(formatCurrency(-20.25, "EUR"))).toBeInTheDocument();
   });
 
-  test.skip("changing between the expenses and income tabs should show different transactions", () => {
+  test("changing between the expenses and income tabs should show different transactions", async () => {
     render(<TransactionHistory />, { wrapper });
 
     const expensesTabTrigger = screen.getByRole("tab", {
@@ -58,13 +60,18 @@ describe("transaction history", () => {
     expect(expensesTable).toBeInTheDocument();
     expect(incomeTable).not.toBeInTheDocument();
 
-    expect(screen.getByText("-20.25")).toBeInTheDocument();
+    expect(screen.getByText(formatCurrency(-20.25, "EUR"))).toBeInTheDocument();
 
-    incomeTabTrigger.click();
+    userEvent.click(incomeTabTrigger);
 
-    expect(incomeTabTrigger).toHaveAttribute("data-state", "active");
-    expect(expensesTabTrigger).toHaveAttribute("data-state", "inactive");
-    expect(screen.queryByText("-20.25")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(incomeTabTrigger).toHaveAttribute("data-state", "active");
+      expect(expensesTabTrigger).toHaveAttribute("data-state", "inactive");
+
+      expect(
+        screen.queryByText(formatCurrency(-20.25, "EUR"))
+      ).not.toBeInTheDocument();
+    });
   });
 
   test("should display the loading state when data is being fetched", async () => {

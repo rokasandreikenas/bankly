@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { Accounts } from ".";
 import { server } from "../../../jest.setup";
 import { accounts } from "../../api/data/accounts";
+import { formatCurrency } from "../../utils/currency";
 
 describe("Accounts component", () => {
   test("renders accounts when the fetch is successful", async () => {
@@ -11,7 +12,12 @@ describe("Accounts component", () => {
     await waitFor(() => {
       accounts.forEach((account) => {
         expect(
-          screen.getByText(account.balance.amount.value.toString())
+          screen.getByText(
+            formatCurrency(
+              account.balance.amount.value,
+              account.balance.amount.currency
+            )
+          )
         ).toBeInTheDocument();
       });
     });
