@@ -15,8 +15,10 @@ async function prepare() {
   return undefined;
 }
 
-prepare().then(() => ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-));
+prepare().then(() =>
+  ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+);
